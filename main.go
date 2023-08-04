@@ -11,7 +11,7 @@ import (
 func main() {
 
 	app := bootrstrap.App()
-
+	gin.SetMode(gin.ReleaseMode)
 	db := app.Db
 	defer app.CloseDBConnection()
 
