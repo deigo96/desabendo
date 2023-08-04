@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Pengajuan</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Arsha
+  * Updated: Jul 05 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header-inner-pages">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a href="index.html">Desa Bendo</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="{{.url}}#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{.url}}#services">Layanan</a></li>
+          <li><a class="nav-link scrollto" href="{{.url}}#about">Tentang</a></li>
+          <li><a class="nav-link scrollto" href="{{.url}}#team">Perangkat</a></li>
+          <li><a class="nav-link scrollto" href="{{.url}}#contact">Kontak</a></li>
+          <li class="dropdown"><a href="#"><span id="profileDrowpdown"></span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="change-password">
+                  <span>Ganti Password</span>
+                  <i class="bi bi-gear-wide-connected"></i>
+                </a>
+              </li>
+              <!-- <li><a href="#">Drop Down 3</a></li> -->
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="#" onclick="LogOut('{{.url}}login')">
+                  <span>Sign Out</span>
+                  <i class="bi bi-box-arrow-right"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{{.url}}">Home</a></li>
+          <li>Pengajuan</li>
+        </ol>
+        <h2>Pengajuan Surat Keterangan Usaha</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-8 m-auto w-50">
+            <div class="row">
+              <div class="form-group mt-4">
+                <label for="name">Nama Lengkap</label>
+                <input type="text" class="form-control" name="nama" id="nama" required>
+              </div>
+              <div class="form-group mt-4">
+                <label for="name">Pekerjaan</label>
+                <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" required>
+              </div>
+              <div class="form-group mt-4">
+                <label for="name">Upload KTP</label>
+                <input type="file" class="form-control" name="fileKtp" id="fileKtp" required>
+                <i class="" style="color: red;">file jpg, jpeg max 1MB</i>
+              </div>
+              <div class="form-group mt-4">
+                <label for="name">Alamat</label>
+                <textarea class="form-control" name="alamat" id="alamat" rows="3" required></textarea>
+              </div>
+              <div class="form-group mt-4">
+                <label for="name">Jenis Usaha</label>
+                <textarea class="form-control" name="jenis_usaha" id="jenis_usaha" rows="3" required></textarea>
+              </div>
+              <div class="mt-4"><button style="background: #47b2e4;
+              border: #47b2e4;" class="btn btn-primary" onclick="kirimPengajuan()">Kirim Pengajuan</button></div>
+            </div>
+          </div>
+
+        </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <hr>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>DESA BENDO</h3>
+            <p>
+              JXP9+M2G, Nginggil, Bendo <br>
+              Kec. Sukodono, Kabupaten Sragen, Jawa Tengah 57263<br>
+              Indonesia <br><br>
+              <strong>Phone:</strong>
+            <p> +62 813 2940 4845<br>
+              +62 812 1571 085<br></p>
+            <strong>Email:</strong>
+            <p>desabendo1703@gmail.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Hubungi Kami</h4>
+            <p>Jika membutuhkan informasi seputar Desa Bendo kunjungi akun sosial media kami</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        &copy; Copyright <strong><span>DesaBendo</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>
+
+<script>
+  const url = '{{.url}}'
+  validateToken(url).then((isValid) => {
+    if (!isValid) {
+      RedirectLogin(url + "login")
+    } else {
+
+      profile = document.getElementById("profileDrowpdown")
+      profile.textContent += GetUsername()
+    }
+  })
+
+  function kirimPengajuan() {
+    let nama = document.getElementById("nama").value
+    let pekerjaan = document.getElementById("pekerjaan").value
+    let alamat = document.getElementById("alamat").value
+    let fileKtp = document.getElementById("fileKtp")
+    let jenis_usaha = document.getElementById("jenis_usaha").value
+    let jenis_pengajuan = 2
+
+    const formData = new FormData();
+    formData.append("nama", nama);
+    formData.append("pekerjaan", pekerjaan);
+    formData.append("jenis_usaha", jenis_usaha);
+    formData.append("alamat", alamat);
+    formData.append("ktp", fileKtp.files[0]);
+    formData.append("jenis_pengajuan", jenis_pengajuan);
+
+    Swal.fire({
+      title: "Apakah anda yakin?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Batal",
+      confirmButtonText: "Kirim pengajuan",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const requestOptions = {
+          method: "POST",             // HTTP method
+          headers: {                  // Request headers (optional, depends on your API requirements)
+            "Authorization": `Bearer ${GetToken()}`,
+            // Add any other headers if required by your API
+          },
+          body: formData,  // Convert the data to JSON format and include it in the request body
+        };
+
+        fetch(url + 'kirim-pengajuan', requestOptions)
+          .then((response) => {
+            if (!response.ok) {
+              console.log("error");
+            }
+            return response.json()
+          })
+          .then((data) => {
+            if (data.code != 201) {
+              throw new Error(data.message)
+            }
+            Swal.fire("Berhasil", "Pengajuan dokumen berhasil dikirim", "success");
+            setInterval(ReloadPage, 2000)
+          })
+          .catch((error) => {
+            Swal.fire("Gagal", error.message, "error");
+          })
+      }
+    });
+
+
+  }
+</script>

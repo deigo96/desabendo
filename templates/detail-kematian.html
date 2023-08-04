@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Detail Pengajuan</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="admin/img/favicon.png" rel="icon" />
+    <link href="admin/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="admin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="admin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="admin/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="admin/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="admin/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="admin/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="admin/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="dashboard" class="logo d-flex align-items-center">
+                <img src="admin/img/logo.png" alt="" />
+                <span class="d-none d-lg-block">Desa Bendo</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div>
+        <!-- End Logo -->
+
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+
+                <li class="nav-item dropdown pe-3">
+
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <span class="d-none d-md-block dropdown-toggle ps-2" id="main-profile"></span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6 id="profile-username"></h6>
+                            <span id="profile-role"></span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#"
+                                onclick="LogOut('{{.url}}login')">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+            </ul>
+        </nav>
+        <!-- End Icons Navigation -->
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{.url}}dashboard">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <!-- End Dashboard Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Pengajuan</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="surat-domisili">
+                            <i class="bi bi-circle"></i><span>Surat Domisili</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="surat-kartu-keluarga">
+                            <i class="bi bi-circle"></i><span>Surat Kartu Keluarga</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="surat-keterangan-usaha">
+                            <i class="bi bi-circle"></i><span>Surat Keterangan Usaha</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="surat-kelahiran">
+                            <i class="bi bi-circle"></i><span>Surat Kelahiran</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="surat-kematian">
+                            <i class="bi bi-circle"></i><span>Surat Kematian</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="surat-kehilangan">
+                            <i class="bi bi-circle"></i><span>Surat Kehilangan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="surat-permohonan-ktp">
+                            <i class="bi bi-circle"></i><span>Surat Permohonan KTP</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- End Forms Nav -->
+            <li class="nav-item" id="daftarAdmin" style="display: none;">
+                <a class="nav-link collapsed" href="daftar-admin">
+                  <i class="bi bi-gear"></i>
+                  <span>Daftar Admin</span>
+                </a>
+              </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="daftar-user">
+                    <i class="bi bi-people"></i>
+                    <span>Daftar User</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+        </ul>
+    </aside>
+    <!-- End Sidebar-->
+
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Pengajuan</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="admin-dashboard.html">Home</a></li>
+                    <li class="breadcrumb-item">Pengajuan</li>
+                    <li class="breadcrumb-item active">Detail</li>
+                </ol>
+            </nav>
+        </div>
+        <!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Detail Pengajuan</h5>
+                            <form class="row g-3">
+                                <div class="col-12">
+                                    <label for="inputNanme4" class="form-label">Nama</label>
+                                    <input type="text" class="form-control" value="{{.items.Nama}}" id="inputNanme4"
+                                        readonly />
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputNanme4" class="form-label">Umur</label>
+                                    <input type="text" class="form-control" value="{{.items.Umur}}" id="inputNanme4"
+                                        readonly />
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="inputEmail4" class="form-label">Tempat Meninggal</label>
+                                    <input type="text" class="form-control" value="{{.items.TempatLahir}}"
+                                        id="inputEmail4" readonly />
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputEmail4" class="form-label">Tanggal Meninggal</label>
+                                    <input type="text" class="form-control"
+                                        value='{{.items.TanggalLahir.Format "02 Jan, 2006"}}' id="inputEmail4"
+                                        readonly />
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputEmail4" class="form-label">Hari Meninggal</label>
+                                    <input type="text" class="form-control" value="{{.items.HariMeninggal}}"
+                                        id="inputEmail4" readonly />
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputNanme4" class="form-label">Penyebab Meninggal</label>
+                                    <textarea name="alamat" class="form-control" id="" cols="3" rows="3"
+                                        readonly>{{.items.Alasan}}</textarea>
+                                </div>
+                                <div class="row pt-3">
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Foto KTP</h5>
+
+                                                <!-- Slides only carousel -->
+                                                <div id="carouselExampleSlidesOnly" class="carousel slide"
+                                                    data-bs-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <a href="../uploads/users/{{.items.Ktp}}" target="_blank">
+                                                                <img src="../uploads/users/{{.items.Ktp}}"
+                                                                    class="d-block w-100" alt="...">
+                                                            </a>
+                                                        </div>
+                                                    </div><!-- End Slides only carousel-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{if eq .items.Status 1}}
+                                    <div class="row pt-3">
+                                        <div class="col-lg-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Dokumen</h5>
+
+                                                    <!-- Slides only carousel -->
+                                                    <div id="carouselExampleSlidesOnly" class="carousel slide"
+                                                        data-bs-ride="carousel">
+                                                        <div class="carousel-inner">
+                                                            <div class="carousel-item active">
+                                                                <a href="../uploads/dokumen/{{.items.Dokumen}}"
+                                                                    target="_blank">{{.items.Dokumen}}
+                                                                </a>
+                                                            </div>
+                                                        </div><!-- End Slides only carousel-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{end}}
+                                    {{if eq .items.Status 2}}
+                                    <div class="col-12">
+                                        <label for="inputNanme4" class="form-label">Alasan Penolakan</label>
+                                        <textarea name="AlasanPenolakan" class="form-control" id="" cols="3" rows="3"
+                                            readonly>{{.items.AlasanPenolakan}}</textarea>
+                                    </div>
+                                    {{end}}
+                                    {{if eq .items.Status 0}}
+                                    <div class="col-12 mb-3">
+                                        <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                                        <input class="form-control" type="file" id="formFile" />
+                                    </div>
+                                    {{end}}
+                                </div>
+                                {{if eq .items.Status 0}}
+                                <div class="text-center">
+                                    <button type="button" onclick="prosesPengajuan(true, 'asdasdasd')"
+                                        class="btn btn-primary">Unggah
+                                        Dokumen</button>
+                                    <button type="button" onclick="prosesPengajuan(false, 'asdasdasd')"
+                                        class="btn btn-secondary">
+                                        Tolak
+                                    </button>
+                                </div>
+                                {{end}}
+                            </form>
+                            <!-- Vertical Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>DesaBendo</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="admin/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="admin/vendor/chart.js/chart.umd.js"></script>
+    <script src="admin/vendor/echarts/echarts.min.js"></script>
+    <script src="admin/vendor/quill/quill.min.js"></script>
+    <script src="admin/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="admin/vendor/tinymce/tinymce.min.js"></script>
+    <script src="admin/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="admin/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
+
+<script>
+    SetProfile()
+    const url = '{{.url}}'
+    validateToken(url).then((isValid) => {
+        if (!isValid) {
+            RedirectLogin(url + "login")
+        }
+    })
+
+    validateTokenSuper(url).then((isValid) => {
+      daftarAmdin = document.getElementById("daftarAdmin")
+      if (!isValid) {
+        daftarAmdin.style.display = "none"
+      } else {
+        daftarAmdin.style.display = "block"
+      }
+    })
+
+    async function prosesPengajuan(action, id) {
+        if (action) {
+            Swal.fire({
+                title: "Apakah anda yakin?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#7066e0",
+                cancelButtonColor: "#6e7881",
+                cancelButtonText: "Batal",
+                confirmButtonText: "Unggah Dokumen",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let formFile = document.getElementById("formFile")
+
+
+                    const formData = new FormData()
+                    formData.append("document", formFile.files[0]);
+                    formData.append("status", 1)
+                    formData.append("id_pengajuan", "{{.items.IdPengajuan}}")
+
+                    const requestOptions = {
+                        method: "POST",             // HTTP method
+                        headers: {                  // Request headers (optional, depends on your API requirements)
+                            "Authorization": `Bearer ${GetToken()}`,
+                            // Add any other headers if required by your API
+                        },
+                        body: formData,  // Convert the data to JSON format and include it in the request body
+                    };
+
+                    fetch(url + 'aksi-dokumen', requestOptions)
+                        .then((response) => {
+                            if (!response.ok) {
+                                console.log("error");
+                            }
+                            return response.json()
+                        })
+                        .then((data) => {
+                            if (data.code != 200) {
+                                throw new Error(data.message)
+                            }
+                            Swal.fire("Berhasil", "Dokumen berhasil diunggah", "success");
+                        })
+                        .catch((error) => {
+                            Swal.fire("Gagal", error.message, "error");
+                        })
+
+                }
+            });
+        } else if (!action) {
+            const { value: text } = await Swal.fire({
+                input: 'textarea',
+                inputLabel: 'Input Alasan Penolakan',
+                inputPlaceholder: 'Tulis pesan disini...',
+                inputAttributes: {
+                    'aria-label': 'Type your message here'
+                },
+                showCancelButton: true,
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Pesan tidak boleh kosong!'
+                    }
+                }
+            })
+
+            if (text) {
+                const formData = new FormData()
+                formData.append("status", 2)
+                formData.append("alasan_penolakan", text)
+                formData.append("id_pengajuan", "{{.items.IdPengajuan}}")
+
+                const requestOptions = {
+                    method: "POST",             // HTTP method
+                    headers: {                  // Request headers (optional, depends on your API requirements)
+                        "Authorization": `Bearer ${GetToken()}`,
+                        // Add any other headers if required by your API
+                    },
+                    body: formData,  // Convert the data to JSON format and include it in the request body
+                };
+
+                fetch(url + 'aksi-dokumen', requestOptions)
+                    .then((response) => {
+                        if (!response.ok) {
+                            console.log("error");
+                        }
+                        return response.json()
+                    })
+                    .then((data) => {
+                        if (data.code != 200) {
+                            throw new Error(data.message)
+                        }
+                        Swal.fire("Berhasil", "Pengajuan berhasil ditolak", "success");
+                    })
+                    .catch((error) => {
+                        Swal.fire("Gagal", error.message, "error");
+                    })
+
+            }
+        }
+    }
+</script>

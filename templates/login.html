@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Login</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .card-title {
+      padding: 20px 0 15px 0;
+      font-size: 18px;
+      font-weight: 500;
+      color: #012970;
+      font-family: "Poppins", sans-serif;
+    }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Login</h5>
+                  </div>
+
+                  <!-- {{if .error_message}}
+                    <div class="pt-4 pb-2">
+                      <h5 class="card-title text-center pb-0 fs-4">{{.error_message}}</h5>
+                    </div>
+                  {{end}} -->
+                  <form class="row g-3 needs-validation" novalidate>
+
+                    <div class="col-12">
+                      <label for="yourUsername" class="form-label">Username</label>
+                      <div class="input-group has-validation">
+                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <div class="invalid-feedback" id="invalid-username">Please enter your username.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="yourPassword" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <div class="invalid-feedback" id="invalid-password">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" id="loginButton" type="button"
+                        onclick="login()">Masuk</button>
+                    </div>
+                    <div class="col-12">
+                      <p class="small mb-0">Belum punya akun? <a href="register">Daftar akun</a></p>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="admin/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="admin/vendor/chart.js/chart.umd.js"></script>
+  <script src="admin/vendor/echarts/echarts.min.js"></script>
+  <script src="admin/vendor/quill/quill.min.js"></script>
+  <script src="admin/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="admin/vendor/tinymce/tinymce.min.js"></script>
+  <script src="admin/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="admin/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>
+
+<script>
+
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      loginButton.click(); // Trigger the login button click
+    }
+  }
+
+  document.getElementById("yourUsername").addEventListener("keypress", handleKeyPress);
+  document.getElementById("yourPassword").addEventListener("keypress", handleKeyPress);
+
+  function login() {
+    let url = '{{.url}}'
+    let username = document.getElementById("yourUsername").value
+    let password = document.getElementById("yourPassword").value
+    const loginButton = document.getElementById("loginButton");
+    const invalidFeedbackUsername = document.getElementById("invalid-username");
+    const invalidFeedbackPassword = document.getElementById("invalid-password");
+
+    if (password == "" && username == "") {
+      invalidFeedbackPassword.style.display = "block";
+      invalidFeedbackUsername.style.display = "block";
+    }
+
+    if (password == "") {
+      invalidFeedbackPassword.style.display = "block";
+    }
+
+    if (username == "") {
+      invalidFeedbackUsername.style.display = "block";
+    }
+
+    if (username != "" && password != "") {
+      const request = {
+        username: username,
+        password: password,
+      }
+
+      // Options for the fetch() function
+      const requestOptions = {
+        method: "POST",             // HTTP method
+        headers: {                  // Request headers (optional, depends on your API requirements)
+          "Content-Type": "application/json", // Specify that you are sending JSON data in the request body
+          // Add any other headers if required by your API
+        },
+        body: JSON.stringify(request),  // Convert the data to JSON format and include it in the request body
+      };
+
+      // Make the POST request using fetch()
+      fetch(url + 'login-handler', requestOptions)
+        .then((response) => {
+          return response.json(); // Parse the response body as JSON
+        })
+        .then((data) => {
+          if (data.code != 200) {
+            throw new Error(data.message)
+          } else {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Login berhasil'
+            }).then((result) => {
+              // Redirect the user to a new URL after the toast is shown
+              localStorage.setItem("username", data.data.username)
+              localStorage.setItem("email", data.data.email)
+              localStorage.setItem("role", data.data.role)
+              localStorage.setItem("token", data.data.token)
+
+              if (data.data.role == "super" || data.data.role == "admin") {
+                window.location.href = `${url}dashboard`;
+              } else {
+                window.location.href = `${url}`;
+              }
+            });
+          }
+
+        })
+        .catch((error) => {
+          // Handle any errors that occurred during the fetch() call or JSON parsing
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'error',
+            title: error.message
+          })
+        });
+    }
+  }
+
+</script>
