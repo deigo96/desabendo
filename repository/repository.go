@@ -35,7 +35,7 @@ func (r *repo) GetUserById(id int) (record *domain.Auth, err error) {
 }
 
 func (r *repo) CreateUser(req domain.Auth) error {
-	if err := r.db.Table("Auth").Create(&req).Error; err != nil {
+	if err := r.db.Table("auth").Create(&req).Error; err != nil {
 		return errors.New("internal server error")
 	}
 
