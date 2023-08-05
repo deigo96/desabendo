@@ -61,6 +61,8 @@ func Setup(env *bootrstrap.Env, db bootrstrap.Databases, router *gin.RouterGroup
 	publicRoute.GET("/detail-pengajuan/:id", cx.DetailPengajuan)
 	protectedRoute.GET("redirect/:type", cx.RedirectUrl)
 	adminRoute.POST("/add-teams", cx.AddTeams)
+	publicRoute.GET("/tambah-team", cx.PageTeams)
+	adminRoute.POST("/hapus-team/:id", cx.DeleteTeam)
 	publicRoute.GET("/teams", cx.GetTeams)
 
 	publicRoute.GET("/pengajuan-surat-domisili", cx.PengajuanDomisili)

@@ -107,7 +107,7 @@
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Pengajuan</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a href="surat-domisili">
               <i class="bi bi-circle"></i><span>Surat Domisili</span>
@@ -155,7 +155,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="daftar-user">
-          <i class="bi bi-people"></i>
+          <i class="bi bi-outlet"></i>
           <span>Daftar User</span>
         </a>
       </li><!-- End Dashboard Nav -->
@@ -175,8 +175,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
-          <li class="breadcrumb-item">Pengajuan</li>
-          <li class="breadcrumb-item active">Detail</li>
+          <li class="breadcrumb-item active">Teams</li>
         </ol>
       </nav>
     </div>
@@ -187,94 +186,50 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Detail Pengajuan</h5>
+              <h5 class="card-title">Tambah Team</h5>
               <form class="row g-3">
                 <div class="col-12">
                   <label for="inputNanme4" class="form-label">Nama</label>
-                  <input type="text" class="form-control" value="{{.items.Nama}}" id="inputNanme4" readonly />
+                  <input type="text" class="form-control" id="nama" />
                 </div>
                 <div class="col-12">
-                  <label for="inputEmail4" class="form-label">Pekerjaan</label>
-                  <input type="text" class="form-control" value="{{.items.Pekerjaan}}" id="inputEmail4" readonly />
+                  <label for="inputEmail4" class="form-label">Jabatan</label>
+                  <input type="text" class="form-control" id="jabatan" />
                 </div>
                 <div class="col-12">
-                  <label for="inputNanme4" class="form-label">Jenis Usaha</label>
-                  <input type="text" class="form-control" value='{{.items.JenisUsaha}}'
-                    id="inputNanme4" readonly />
+                  <label for="inputNanme4" class="form-label">Twitter</label>
+                  <input type="text" class="form-control" id="twitter" />
                 </div>
                 <div class="col-12">
-                  <label for="inputNanme4" class="form-label">Alamat</label>
-                  <textarea name="alamat" class="form-control" id="" cols="3" rows="3"
-                    readonly>{{.items.Alamat}}</textarea>
+                  <label for="inputNanme4" class="form-label">Facebook</label>
+                  <input type="text" class="form-control" id="facebook" />
                 </div>
-                <div class="row pt-3">
-                  <div class="col-lg-6">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Foto KTP</h5>
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Instagram</label>
+                  <input type="text" class="form-control" id="instagram" />
+                </div>
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Linkedin</label>
+                  <input type="text" class="form-control" id="linkedin" />
+                </div>
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">Tentang</label>
+                  <textarea name="alamat" class="form-control" id="tentang" cols="3" rows="3"></textarea>
+                </div>
 
-                        <!-- Slides only carousel -->
-                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                          <div class="carousel-inner">
-                            <div class="carousel-item active">
-                              <a href="../uploads/users/{{.items.Ktp}}" target="_blank">
-                                <img src="../uploads/users/{{.items.Ktp}}" class="d-block w-100" alt="...">
-                              </a>
-                            </div>
-                          </div><!-- End Slides only carousel-->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {{if eq .items.Status 1}}
-                  <div class="row pt-3">
-                    <div class="col-lg-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Dokumen</h5>
-
-                          <!-- Slides only carousel -->
-                          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <a href="../uploads/dokumen/{{.items.Dokumen}}" target="_blank">{{.items.Dokumen}}
-                                </a>
-                              </div>
-                            </div><!-- End Slides only carousel-->
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {{end}}
-                  {{if eq .items.Status 2}}
-                  <div class="col-12">
-                    <label for="inputNanme4" class="form-label">Alasan Penolakan</label>
-                    <textarea name="AlasanPenolakan" class="form-control" id="" cols="3" rows="3"
-                      readonly>{{.items.AlasanPenolakan}}</textarea>
-                  </div>
-                  {{end}}
-                  {{if eq .items.Status 0}}
-                  <div class="col-12 mb-3">
-                    <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
-                    <input class="form-control" type="file" id="formFile" />
-                  </div>
-                  {{end}}
+                <div class="col-12 mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Unggah Foto</label>
+                  <input class="form-control" type="file" id="formFile" />
                 </div>
-                {{if eq .items.Status 0}}
-                <div class="text-center">
-                  <button type="button" onclick="prosesPengajuan(true, 'asdasdasd')" class="btn btn-primary">Unggah
-                    Dokumen</button>
-                  <button type="button" onclick="prosesPengajuan(false, 'asdasdasd')" class="btn btn-secondary">
-                    Tolak
-                  </button>
-                </div>
-                {{end}}
-              </form>
-              <!-- Vertical Form -->
             </div>
+            <div class="text-center pb-4">
+              <button type="button" onclick="tambahTeam()" class="btn btn-primary">Tambah</button>
+            </div>
+            </form>
+            <!-- Vertical Form -->
           </div>
         </div>
+      </div>
       </div>
     </section>
   </main>
@@ -286,11 +241,6 @@
       &copy; Copyright <strong><span>DesaBendo</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
     </div>
   </footer>
   <!-- End Footer -->
@@ -325,83 +275,44 @@
   })
 
   validateTokenSuper(url).then((isValid) => {
-      daftarAmdin = document.getElementById("daftarAdmin")
-      if (!isValid) {
-        daftarAmdin.style.display = "none"
-      } else {
-        daftarAmdin.style.display = "block"
-      }
-    })
+    daftarAmdin = document.getElementById("daftarAdmin")
+    if (!isValid) {
+      daftarAmdin.style.display = "none"
+    } else {
+      daftarAmdin.style.display = "block"
+    }
+  })
 
-  async function prosesPengajuan(action, id) {
-    if (action) {
-      Swal.fire({
-        title: "Apakah anda yakin?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#7066e0",
-        cancelButtonColor: "#6e7881",
-        cancelButtonText: "Batal",
-        confirmButtonText: "Unggah Dokumen",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          let formFile = document.getElementById("formFile")
+  async function tambahTeam() {
+    Swal.fire({
+      title: "Apakah anda yakin?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#7066e0",
+      cancelButtonColor: "#6e7881",
+      cancelButtonText: "Batal",
+      confirmButtonText: "Tambah",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let formFile = document.getElementById("formFile")
+        let nama = document.getElementById("nama").value
+        let jabatan = document.getElementById("jabatan").value
+        let instagram = document.getElementById("instagram").value
+        let twitter = document.getElementById("twitter").value
+        let facebook = document.getElementById("facebook").value
+        let tentang = document.getElementById("tentang").value
+        let linkedin = document.getElementById("linkedin").value
 
 
-          const formData = new FormData()
-          formData.append("document", formFile.files[0]);
-          formData.append("status", 1)
-          formData.append("id_pengajuan", "{{.items.IdPengajuan}}")
-
-          const requestOptions = {
-            method: "POST",             // HTTP method
-            headers: {                  // Request headers (optional, depends on your API requirements)
-              "Authorization": `Bearer ${GetToken()}`,
-              // Add any other headers if required by your API
-            },
-            body: formData,  // Convert the data to JSON format and include it in the request body
-          };
-
-          fetch(url + 'aksi-dokumen', requestOptions)
-            .then((response) => {
-              if (!response.ok) {
-                console.log("error");
-              }
-              return response.json()
-            })
-            .then((data) => {
-              if (data.code != 200) {
-                throw new Error(data.message)
-              }
-              Swal.fire("Berhasil", "Dokumen berhasil diunggah", "success");
-            })
-            .catch((error) => {
-              Swal.fire("Gagal", error.message, "error");
-            })
-
-        }
-      });
-    } else if (!action) {
-      const { value: text } = await Swal.fire({
-        input: 'textarea',
-        inputLabel: 'Input Alasan Penolakan',
-        inputPlaceholder: 'Tulis pesan disini...',
-        inputAttributes: {
-          'aria-label': 'Type your message here'
-        },
-        showCancelButton: true,
-        inputValidator: (value) => {
-          if (!value) {
-            return 'Pesan tidak boleh kosong!'
-          }
-        }
-      })
-
-      if (text) {
         const formData = new FormData()
-        formData.append("status", 2)
-        formData.append("alasan_penolakan", text)
-        formData.append("id_pengajuan", "{{.items.IdPengajuan}}")
+        formData.append("foto", formFile.files[0]);
+        formData.append("nama", nama)
+        formData.append("jabatan", jabatan)
+        formData.append("instagram", instagram)
+        formData.append("twitter", twitter)
+        formData.append("facebook", facebook)
+        formData.append("tentang", tentang)
+        formData.append("linkedin", linkedin)
 
         const requestOptions = {
           method: "POST",             // HTTP method
@@ -412,7 +323,7 @@
           body: formData,  // Convert the data to JSON format and include it in the request body
         };
 
-        fetch(url + 'aksi-dokumen', requestOptions)
+        fetch(url + 'add-teams', requestOptions)
           .then((response) => {
             if (!response.ok) {
               console.log("error");
@@ -420,16 +331,48 @@
             return response.json()
           })
           .then((data) => {
-            if (data.code != 200) {
+            if (data.code != 201) {
               throw new Error(data.message)
             }
-            Swal.fire("Berhasil", "Pengajuan berhasil ditolak", "success");
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+
+            Toast.fire({
+              icon: 'success',
+              title: "Data berhasil ditambah"
+            }).then((result) => {
+              location.reload()
+            })
           })
           .catch((error) => {
-            Swal.fire("Gagal", error.message, "error");
-          })
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
 
+            Toast.fire({
+              icon: 'error',
+              title: error.message
+            })
+          })
       }
-    }
+    });
+
   }
 </script>

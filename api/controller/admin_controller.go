@@ -2,7 +2,6 @@ package controller
 
 import (
 	"desa-sragen/domain"
-	"fmt"
 	"net/http"
 	"path/filepath"
 
@@ -257,6 +256,12 @@ func (cx *Controller) AksiDokumen(c *gin.Context) {
 
 }
 
+func (cx *Controller) PageTeams(c *gin.Context)  {
+	c.HTML(200, "tambah-team.html", gin.H{
+		"url": cx.Env(),
+	})
+}
+
 func (cx *Controller) AddTeams(c *gin.Context)  {
 	var extDoc string
 
@@ -276,7 +281,7 @@ func (cx *Controller) AddTeams(c *gin.Context)  {
 		fileDoc, err := c.FormFile("foto")
 
 		if fileDoc == nil || err != nil {
-			c.JSON(400, domain.JsonResponse(400, "file dokumen tidak boleh kosong", domain.Empty{}))
+			c.JSON(400, domain.JsonResponse(400, "file foto tidak boleh kosong", domain.Empty{}))
 			return
 		}
 
@@ -285,15 +290,15 @@ func (cx *Controller) AddTeams(c *gin.Context)  {
 			return
 		}
 
-		if !isAllowedExtension(fileDoc.Filename, []string{".jpd", ".jpeg", ".PNG"}) {
-			c.JSON(http.StatusBadRequest, domain.JsonResponse(http.StatusBadRequest, "Format file harus pdf", domain.Empty{}))
+		if !isAllowedExtension(fileDoc.Filename, []string{".jpg", ".jpeg", ".PNG"}) {
+			c.JSON(http.StatusBadRequest, domain.JsonResponse(http.StatusBadRequest, "Format foto tidak sesuai", domain.Empty{}))
 			return
 		}
 
 		extDoc = domain.GenerateUuid() + filepath.Ext(fileDoc.Filename)
 		destination := filepath.Join("./uploads/teams", extDoc)
 		if err := c.SaveUploadedFile(fileDoc, destination); err != nil {
-			c.JSON(http.StatusInternalServerError, domain.JsonResponse(http.StatusInternalServerError, "Failed to save file", domain.Empty{}))
+			c.JSON(http.StatusInternalServerError, domain.JsonResponse(http.StatusInternalServerError, "Failed to save foto", domain.Empty{}))
 			return
 		}
 
@@ -310,7 +315,6 @@ func (cx *Controller) AddTeams(c *gin.Context)  {
 
 func (cx *Controller) GetTeams(c *gin.Context)  {
 	teams, err := cx.Repo.GetTeams()
-	fmt.Println(teams)
 	if err != nil {
 		c.HTML(500, "500.html", gin.H{})
 		return
@@ -320,4 +324,21 @@ func (cx *Controller) GetTeams(c *gin.Context)  {
 		"url": cx.Env(),
 		"items": teams,
 	})
+}
+
+func (cx *Controller) DeleteTeam(c *gin.Context)  {
+	id := domain.StringToInt(c.Param("id"))
+	if id == 0 {
+		c.JSON(400, domain.JsonResponse(400, "bad request", domain.Empty{}))
+		return
+	}
+
+	if err := cx.Repo.DeleteTeam(id); err != nil {
+		c.JSON(400, domain.JsonResponse(400, "internal server error", domain.Empty{}))
+		return
+	}
+
+
+	c.JSON(200, domain.JsonResponse(200, "Success", domain.Empty{}))
+	
 }

@@ -67,7 +67,6 @@ func ValidateSuper() gin.HandlerFunc {
 func ValidateAdmin() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		privilege := ctx.GetInt("role")
-		fmt.Println(privilege)
 		if privilege == 2 || privilege == 1 {
 			ctx.Next()
 			return

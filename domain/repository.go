@@ -19,4 +19,5 @@ type Repo interface {
 	CountBelumDiproses() int
 	LastDokumen() ([]Dashboard, error)
 	CountUsers() int
+	DeleteTeam(id int) error
 }

@@ -46,7 +46,6 @@ async function validateToken(url) {
     });
 
     if (!response.ok) {
-      console.log(response);
       return false;
     } else {
       return true;

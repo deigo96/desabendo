@@ -10,8 +10,8 @@
   <meta content="" name="keywords" />
 
   <!-- Favicons -->
-  <link href="admin/img/favicon.png" rel="icon" />
-  <link href="admin/img/apple-touch-icon.png" rel="apple-touch-icon" />
+  <link href="assets/img/favicon.png" rel="icon" />
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect" />
@@ -162,6 +162,12 @@
           <span>Daftar User</span>
         </a>
       </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="teams">
+          <i class="bi bi-outlet"></i>
+          <span>Teams</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
     </ul>
   </aside>
   <!-- End Sidebar-->
@@ -270,7 +276,6 @@
   <script>
     SetProfile()
     const url = '{{.url}}'
-    console.log(url);
     validateToken(url).then((isValid) => {
       if (!isValid) {
         RedirectLogin(url + "login")
@@ -279,7 +284,6 @@
 
     validateTokenSuper(url).then((isValid) => {
       daftarAmdin = document.getElementById("daftarAdmin")
-      console.log(isValid);
       if (!isValid) {
         daftarAmdin.style.display = "none"
       } else {

@@ -159,3 +159,12 @@ func (r *repo) LastDokumen() (record []domain.Dashboard, err error) {
 	
 	return record, nil
 }
+
+func (r *repo) DeleteTeam(id int) error {
+	if err := r.db.Table("teams").Where("id = ?", id).Delete(&id).Error; err != nil{
+		log.Println(err)
+		return err
+	}
+
+	return nil
+}

@@ -29,6 +29,7 @@ func main() {
 	r.Static("/admin", "./templates/admin")
 	r.Static("/uploads/users", "./uploads/users")
 	r.Static("/uploads/dokumen", "./uploads/dokumen")
+	r.Static("/uploads/teams", "./uploads/teams")
 
 	route := r.Group("")
 	r.NoRoute(func(ctx *gin.Context) {

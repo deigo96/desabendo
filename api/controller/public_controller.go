@@ -20,10 +20,14 @@ func (cx *Controller) Env()  string {
 }
 
 func (cx *Controller) Dashboard(c *gin.Context) {
+	teams, err := cx.Repo.GetTeams()
+	if err != nil {
+	}
 
-
+	
 	c.HTML(200, "index.html", gin.H{
 		"url":cx.Env(),
+		"items": teams,
 	})
 }
 

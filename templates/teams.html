@@ -10,8 +10,8 @@
   <meta content="" name="keywords" />
 
   <!-- Favicons -->
-  <link href="admin/img/favicon.png" rel="icon" />
-  <link href="admin/img/apple-touch-icon.png" rel="apple-touch-icon" />
+  <link href="assets/img/favicon.png" rel="icon" />
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect" />
@@ -185,53 +185,47 @@
     <!-- End Page Title -->
 
     <section class="section">
-      <div class="row">
+      <div class="row d-grid">
         <div class="col-lg-12">
           <div class="card">
-            
+
             <div class="card-body">
-              <h5 class="card-title">Pengajuan</h5>
+              <h5 class="card-title">Daftar Teams</h5>
               <div class="d-flex justify-content-end" style="padding-right: 10px;" id="buttonTambahAdmin">
-                <button type="button" class="btn btn-primary" onclick="tambahTeams()">
+                <a type="button" class="btn btn-primary" href="tambah-team">
                   <i class="bi bi-plus me-1"></i> Tambah
-                </button>
+                </a>
               </div>
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th scope="col">Id</th>
                     <th scope="col">Nama</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Tanggal dibuat</th>
+                    <th scope="col">Jabatan</th>
+                    <th scope="col">Twitter</th>
+                    <th scope="col">Instagram</th>
+                    <th scope="col">Facebook</th>
+                    <th scope="col">Linkedin</th>
+                    <th scope="col">Tentang</th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   {{if .items}} {{range .items}}
                   <tr>
-                    <td>{{.AuthId}}</td>
-                    <td>{{.Username}}</td>
-                    <td>{{.Email}}</td>
+                    <td>{{.Nama}}</td>
+                    <td>{{.Jabatan}}</td>
+                    <td><a target="_blank" href="{{.Twitter}}">Twitter</a></td>
+                    <td><a target="_blank" href="{{.Instagram}}">Instagram</a></td>
+                    <td><a target="_blank" href="{{.Facebook}}">Facebook</a></td>
+                    <td><a target="_blank" href="{{.Linkedin}}">Linkedin</a></td>
+                    <td>{{.Tentang}}</td>
+
                     <td>
-                      {{if .IsActive}}
-                      <span class="badge bg-success">Aktif</span>
-                      {{else}}
-                      <span class="badge bg-danger">Tidak Aktif</span>
-                      {{end}}
-                    </td>
-                    <td>{{.CreatedAt.Format "01-02-2006 15:04:05"}}</td>
-                    <td>
-                      {{if .IsActive}}
-                      <button class="btn btn-danger" onclick='nonactive("{{.AuthId}}")' style="padding: 0px 6px">
-                        <i class="bi bi-x"></i>
+                      <button class="btn btn-danger" onclick='hapusTeam("{{.Id}}", "{{.Nama}}")'
+                        style="padding: 0px 6px">
+                        <i class="bi bi-trash"></i>
                       </button>
-                      {{else}}
-                      <button class="btn btn-success" onclick='reactivation("{{.AuthId}}")' style="padding: 0px 6px">
-                        <i class="bi bi-check"></i>
-                      </button>
-                      {{end}}
                     </td>
                   </tr>
                   {{end}} {{end}}
@@ -277,141 +271,96 @@
   <!-- Template Main JS File -->
   <script src="admin/js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  <script>
-    SetProfile()
-    const url = '{{.url}}'
-    console.log(url);
-    validateToken(url).then((isValid) => {
-      if (!isValid) {
-        RedirectLogin(url + "login")
-      }
-    })
-
-    validateTokenSuper(url).then((isValid) => {
-      daftarAmdin = document.getElementById("daftarAdmin")
-      console.log(isValid);
-      if (!isValid) {
-        daftarAmdin.style.display = "none"
-      } else {
-        daftarAmdin.style.display = "block"
-      }
-    })
-
-    function reactivation(id) {
-      Swal.fire({
-        title: "Apakah ingin mengaktifkan user?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#7066e0",
-        cancelButtonColor: "#6e7881",
-        cancelButtonText: "Batal",
-        confirmButtonText: "Aktifasi",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          fetch(`${url}activation-admin/${id}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${GetToken()}`,
-            },
-          })
-            .then((response) => {
-              return response.json()
-            })
-            .then((data) => {
-              if (data.code == 401) {
-                RedirectLogin(url)
-              }
-              if (data.code != 200) {
-                throw new Error(data.message)
-              }
-
-              let redirectUrl = `${url}login`
-              const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
-
-              Toast.fire({
-                icon: 'success',
-                title: 'Akun berhasil di aktifasi'
-              }).then((result) => {
-                // Redirect the user to a new URL after the toast is shown
-                location.reload()
-              });
-            })
-            .catch(error => {
-              Swal.showValidationMessage(error.message)
-            })
-        }
-      })
-    }
-
-    function nonactive(id) {
-      Swal.fire({
-        title: "Apakah ingin menonaktifkan user?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#7066e0",
-        cancelButtonColor: "#6e7881",
-        cancelButtonText: "Batal",
-        confirmButtonText: "Nonaktif",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          fetch(`${url}in-active-admin/${id}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${GetToken()}`,
-            },
-          })
-            .then((response) => {
-              return response.json()
-            })
-            .then((data) => {
-              if (data.code == 401) {
-                RedirectLogin(url)
-              }
-              if (data.code != 200) {
-                throw new Error(data.message)
-              }
-
-              let redirectUrl = `${url}login`
-              const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
-
-              Toast.fire({
-                icon: 'success',
-                title: 'Akun berhasil di non-aktifkan'
-              }).then((result) => {
-                // Redirect the user to a new URL after the toast is shown
-                location.reload()
-              });
-            })
-            .catch(error => {
-              Swal.showValidationMessage(error.message)
-            })
-        }
-      })
-    }
-  </script>
 </body>
 
 </html>
+<script>
+  SetProfile()
+  const url = '{{.url}}'
+  validateToken(url).then((isValid) => {
+    if (!isValid) {
+      RedirectLogin(url + "login")
+    }
+  })
+  function hapusTeam(id, nama) {
+    Swal.fire({
+      title: "Apakah anda yakin ingin menghapus " + nama,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#7066e0",
+      cancelButtonColor: "#6e7881",
+      cancelButtonText: "Batal",
+      confirmButtonText: "Hapus",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const requestOptions = {
+          method: "POST",             // HTTP method
+          headers: {                  // Request headers (optional, depends on your API requirements)
+            "Authorization": `Bearer ${GetToken()}`,
+            // Add any other headers if required by your API
+          },
+        };
+
+        fetch(url + 'hapus-team/' + id, requestOptions)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Data gagal dihapus");
+            }
+            return response.json()
+          })
+          .then((data) => {
+            if (data.code != 200) {
+              throw new Error(data.message)
+            }
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+
+            Toast.fire({
+              icon: 'success',
+              title: "Data berhasil dihapus"
+            }).then((result) => {
+              location.reload()
+            })
+          })
+          .catch((error) => {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+
+            Toast.fire({
+              icon: 'error',
+              title: error.message
+            })
+          })
+
+      }
+    });
+  }
+
+  validateTokenSuper(url).then((isValid) => {
+    daftarAmdin = document.getElementById("daftarAdmin")
+    if (!isValid) {
+      daftarAmdin.style.display = "none"
+    } else {
+      daftarAmdin.style.display = "block"
+    }
+  })
+
+</script>
