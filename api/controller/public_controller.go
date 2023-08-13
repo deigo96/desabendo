@@ -51,7 +51,7 @@ func (cx *Controller) SendEmail(c *gin.Context)  {
 	}
 	
 	// Replace with your SendGrid API key
-	apiKey := "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"
+	apiKey := cx.Config.ApiKey
 
 	// Compose the email message
 	toEmail := "desabendo1703@gmail.com"

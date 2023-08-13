@@ -12,6 +12,7 @@ type Env struct {
 	ServerUrl string
 	SecretKey string
 	Db         configDb
+	ApiKey string `mapstucture:"API_KEY"`
 }
 
 type configDb struct {
@@ -27,6 +28,7 @@ type EnvStruct struct {
 	ServerPort           string `mapstructure:"SERVER_PORT"`
 	ServerUrl           string `mapstructure:"SERVER_URL"`
 	SecretKey           string `mapstructure:"SERVER_KEY"`
+	ApiKey string `mapstucture:"API_KEY"`
 }
 
 type dbConfig struct {
@@ -63,6 +65,7 @@ func NewEnv() *Env {
 	config.ServerPort = env.ServerPort
 	config.ServerUrl = env.ServerUrl
 	config.SecretKey = env.SecretKey
+	config.ApiKey = env.ApiKey
 
 	// db rajatracker pulsa
 	db := &configDb{
